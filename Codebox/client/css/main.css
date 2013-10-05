@@ -1,6 +1,5 @@
 #center{
 	text-align: center;
-	width: 100%;
 }
 	
 #header{
@@ -55,51 +54,39 @@
 }
 
 #results{
-	margin-top: 20px;
-	margin-bottom: 20px;
-    white-space: nowrap;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    left: 0px;
 }
 
 #details{
 	
 }
 
-
 .result{
-	height: 330px;
+    display: inline-block;
+    white-space: normal;
 	width: 240px;
-	margin: .3cm;
-	float: right;
-	background-color: white; 
+	height: 330px;
 	
+	margin: 15px;
+	padding: 20px;
+	background-color: white; 
+
+	/* outer shadows  (note the rgba is red, green, blue, alpha) */
 	-webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4); 
 	-moz-box-shadow: 0px 1px 6px rgba(23, 69, 88, .5);
 	
+	/* rounded corners */
 	-webkit-border-radius: 12px;
 	-moz-border-radius: 7px; 
 	border-radius: 7px;
 	
+	/* gradients */
 	background: -webkit-gradient(linear, left top, left bottom, 
 	color-stop(0%, white), color-stop(15%, white), color-stop(100%, #D7E9F5)); 
-	background: -moz-linear-gradient(top, white 0%, white 55%, #D5E4F3 130%); 
+	background: -moz-linear-gradient(top, white 0%, white 55%, #D5E4F3 130%);
 }
 
-.div-table{
-	display:table;         
-	width:auto;         
-	border-spacing:5px;/*cellspacing:poor IE support for  this*/
-}
-.div-table-row{
-	display:table-row;
-	width:auto;
-	clear:both;
 
-}
-.div-table-col{
-	float:left;/*fix for  buggy browsers*/
-	display:table-column;         
-	width:200px;         
+.row{
+	 overflow-x: scroll;
+    white-space: nowrap;
 }

@@ -2,17 +2,15 @@
 
 <template name="results">
 	<div id="results">
-		<div class="div-table">
-			<div class="div-table-row">
+		<div class="row">
 				{{#each allResults}}
-					<div class="result">
+					<li class="result">
 						name:   {{name}}<br>
 						author: {{author}}<br><br>
 						
 						code:   {{code}}
-					</div>
+					</li>
 				{{/each}}
-			</div>
 		</div>
 	</div>
 </template>
