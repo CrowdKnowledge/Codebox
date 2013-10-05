@@ -1,0 +1,26 @@
+#center{
+	text-align: center;
+	padding-left: 2cm;
+	padding-right: 2cm;
+}
+	
+#header{
+	padding-top: 1.2cm;
+	padding-bottom: 1.2cm;
+}
+
+.plain{
+	font-family: 'Roboto Slab', serif;
+}
+
+#title{
+	color: #5070BA;
+	font-size: 90px;
+}
+
+#subtitle{
+	color: #05202A;
+	opacity: 100;
+	font-size: 20px;
+	margin-top: -.3cm;
+}
