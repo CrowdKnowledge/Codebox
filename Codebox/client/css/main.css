@@ -1,12 +1,10 @@
 #center{
 	text-align: center;
-	padding-left: 2cm;
-	padding-right: 2cm;
+	width: 100%;
 }
 	
 #header{
 	padding-top: 1.2cm;
-	padding-bottom: 1.2cm;
 }
 
 .plain{
@@ -15,12 +13,93 @@
 
 #title{
 	color: #5070BA;
-	font-size: 90px;
+	font-size: 130px;
 }
 
 #subtitle{
-	color: #05202A;
+	color: #35607A;
 	opacity: 100;
 	font-size: 20px;
 	margin-top: -.3cm;
+}
+
+#searchbar{
+	margin-bottom: .5cm;
+}
+
+#search input[type="text"] {
+    background: url(search-white.png) no-repeat 10px 6px #fcfcfc;
+    border: 1px solid #d1d1d1;
+    font: bold 12px Arial,Helvetica,Sans-serif;
+    color: #bebebe;
+    width: 150px;
+    height: 15px;
+    padding: 6px 15px 6px 35px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+    -webkit-transition: all 0.25s ease 0s;
+    -moz-transition: all 0.25s ease 0s;
+    -o-transition: all 0.25s ease 0s;
+    transition: all 0.25s ease 0s;
+    }
+
+#search input[type="text"]:focus {
+    width: 320px;
+    height: 40px;
+    font-size: 30px;
+}
+
+#results{
+	margin-top: 20px;
+	margin-bottom: 20px;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    left: 0px;
+}
+
+#details{
+	
+}
+
+
+.result{
+	height: 330px;
+	width: 240px;
+	margin: .3cm;
+	float: right;
+	background-color: white; 
+	
+	-webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4); 
+	-moz-box-shadow: 0px 1px 6px rgba(23, 69, 88, .5);
+	
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 7px; 
+	border-radius: 7px;
+	
+	background: -webkit-gradient(linear, left top, left bottom, 
+	color-stop(0%, white), color-stop(15%, white), color-stop(100%, #D7E9F5)); 
+	background: -moz-linear-gradient(top, white 0%, white 55%, #D5E4F3 130%); 
+}
+
+.div-table{
+	display:table;         
+	width:auto;         
+	border-spacing:5px;/*cellspacing:poor IE support for  this*/
+}
+.div-table-row{
+	display:table-row;
+	width:auto;
+	clear:both;
+
+}
+.div-table-col{
+	float:left;/*fix for  buggy browsers*/
+	display:table-column;         
+	width:200px;         
 }

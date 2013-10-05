@@ -1,15 +1,14 @@
-if (Meteor.isClient) {
-  Template.hello.greeting = function () {
-    return "Welcome to Codebox.";
-  };
 
-  Template.hello.events({
-    'click input' : function () {
-      // template data, if any, is available in 'this'
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
-    }
-  });
+
+if (Meteor.isClient) {
+
+	Template.results.allResults = function(){
+		return Snippets.find().fetch();
+	}
+	
+	Template.results.name = function(){
+		return this.name;
+	}
 }
 
 if (Meteor.isServer) {

@@ -7,17 +7,12 @@
 	<div id="center">
 		<div id="header">
 			<h id="title">Codebox</h>
-			<p id="subtitle">the search engine for code<p>
+			<p id="subtitle">the search engine for code snippets<p>
+			<div id="search">
+				  <input id="searchbar" spellcheck="false" type="text" size="40" placeholder="Search..." />
+			</div>
 		</div>
 		
-		<div id="main">
-		
-		<div>
+		{{> results}}
 	<div>
 </body>
-
-<template name="hello">
-  <h1>Hello World!</h1>
-  {{greeting}}
-  <input type="button" value="Click" />
-</template>
