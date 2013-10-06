@@ -2,6 +2,7 @@ Session.set('details', false);
 Session.set('results', []);
 Session.set('query', "");
 
+
 if (Meteor.isClient) {
 
 	Template.results.allResults = function(){
@@ -17,7 +18,6 @@ if (Meteor.isClient) {
 	}
 	
 	Template.results.cbid = function(){
-		console.log('called');
 		return this.cbid;
 	}
 	
@@ -60,7 +60,6 @@ Deps.autorun(function () {
 		Meteor.call('analyze', Session.get('query'), function(e, r){
 			var rs = [];
 			for(var i = 0; i < r.length; i++){
-				console.log(r[i]);
 				rs.push(Snippets.findOne({cbid: r[i]}));
 			}
 			Session.set('results', rs);

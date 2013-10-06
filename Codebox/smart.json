@@ -1,6 +1,7 @@
 {
   "packages": {
     "github": {},
-    "require": {}
+    "require": {},
+    "alchemy-api": {}
   }
 }

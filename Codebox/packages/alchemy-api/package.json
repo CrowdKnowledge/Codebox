@@ -1,0 +1,21 @@
+{
+  "name": "alchemy-api",
+  "description": "An Alchemy API library for Node.js",
+  "tags": ["Alchemy", "Natural Language Processing", "util"],
+  "version": "1.0.0",
+  "author": "Jason Morgan <jason@framingeinstein.com>",
+  "contributors": [
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/framingeinstein/node-alchemy.git"
+  },
+  "license": "MIT",
+  "engines": { "node": ">= 0.4.0" },
+  "scripts": {
+    "test": "node_modules/.bin/nodeunit test"
+  },
+  "devDependencies": {
+    "nodeunit": ">=0.6.2"
+  }
+}
