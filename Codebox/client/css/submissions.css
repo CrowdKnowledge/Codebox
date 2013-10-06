@@ -33,10 +33,13 @@
 
 #inputDescription{
 	width: 32%;
+	font-size: 13px;
 	height: 380px;
 }
 
 #inputCode{
+	font-size: 13px;
+
 	width: 43%;
 	height: 380px;
 }

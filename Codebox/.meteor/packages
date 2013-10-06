@@ -9,3 +9,5 @@ insecure
 preserve-inputs
 require
 alchemy-api
+accounts-github
+accounts-ui

@@ -6,7 +6,6 @@ Session.set('query', "");
 if (Meteor.isClient) {
 
 	Template.results.allResults = function(){
-		console.log('rerunnnnn');
 		return Session.get('results');
 	}
 	

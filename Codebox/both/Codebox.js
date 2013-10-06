@@ -1,5 +1,4 @@
 Snippets = new Meteor.Collection('Snippets');
-Alchemy = {};
 
 Snippet = function(title, description, code, author){
 	this.title = title;
@@ -12,6 +11,11 @@ Snippet = function(title, description, code, author){
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-//   	Alchemy = new AlchemyAPI();
+	var tmp = Snippets.find().fetch();
+	for(var i = 0; i < tmp.length; i++){
+		if(typeof(tmp[i].title) == 'undefined'){
+			Snippets.remove(tmp[i]);
+		}
+	}
   });
 }
