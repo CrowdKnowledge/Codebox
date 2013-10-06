@@ -21,7 +21,6 @@ if (Meteor.isClient) {
 		return this.cbid;
 	}
 	
-	
 	Template.details.isInDetail = function(){
 		if(Session.get('details') == false){
 			return false;
@@ -44,7 +43,6 @@ focusOn = function(id){
 }
 
 openContributor = function(){
-console.log('something');
     $("html, body").animate({scrollTop: $("#inputTitle").offset().top}, 300); 
 }
 
@@ -52,9 +50,21 @@ insertSnippet = function(){
 	Snippets.insert(new Snippet(document.getElementById('inputTitle').value
 				 	 		   ,document.getElementById('inputDescription').value
 				 	 		   ,document.getElementById('inputCode').value));
+	Session.set('query', document.getElementById('searchbar').value);
 }
 
 
 Deps.autorun(function () {
-	console.log(Session.get('query'));
+	// should add a cancel call here
+	if(Session.get('query') != ''  && typeof(Session.get('query')) != 'undefined'){
+		Meteor.call('analyze', Session.get('query'), function(e, r){
+			var rs = [];
+			for(var i = 0; i < r.length; i++){
+				console.log(r[i]);
+				rs.push(Snippets.findOne({cbid: r[i]}));
+			}
+			Session.set('results', rs);
+		});
+	}
 });
+
