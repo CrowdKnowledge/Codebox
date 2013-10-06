@@ -1,17 +1,15 @@
 Snippets = new Meteor.Collection('Snippets');
 
-Snippet = function(){
-	name = randKey(5);
-	author = randKey(5) + " " + randKey(7);
-	code = randKey(500);
-	stars = Math.round(Math.random());
+Snippet = function(title, description, code, author){
+	this.title = title;
+	this.author = author  ||  'Public';
+	this.code = code;
+	this.description = description;
+	this.stars = 0;
+	this.cbid = randKey(15);
 }
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-  	Snippets.remove({});
-  	for(i = 0; i < 100; i++){
-  		Snippets.insert(new Snippet(i));
-  	}
   });
 }

@@ -4,15 +4,22 @@
 </head>
 
 <body>
+	<a onclick="openContributor()" class="hint">Contribute</a>
+	<a href="https://github.com/dasmithii/codebox"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
 	<div id="center">
 		<div id="header">
-			<h id="title">Codebox</h>
+			<h href="http://codebox.cc" id="title">Codebox</h>
 			<p id="subtitle">the search engine for code snippets<p>
 			<div id="search">
-				  <input id="searchbar" spellcheck="false" type="text" size="40" placeholder="Search..." />
+				  <input id="searchbar" spellcheck="false" type="text" size="40" placeholder="Whadayah need?" />
 			</div>
 		</div>
 		
 		{{> results}}
+		<hr class="spacer">
+		{{> details}}
+		{{> codeinput}}
 	<div>
+	
+	{{> footer}}
 </body>
