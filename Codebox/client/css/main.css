@@ -66,6 +66,7 @@
 .row{
 	 overflow-x: scroll;
     white-space: nowrap;
+    min-height: 330px;
 }
 
 

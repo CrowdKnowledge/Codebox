@@ -1,4 +1,3 @@
-
 if (Meteor.isServer) {
 	Meteor.methods({
 		analyze: function (query) {

@@ -1,4 +1,5 @@
 Snippets = new Meteor.Collection('Snippets');
+Alchemy = {};
 
 Snippet = function(title, description, code, author){
 	this.title = title;
@@ -11,6 +12,6 @@ Snippet = function(title, description, code, author){
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
+//   	Alchemy = new AlchemyAPI();
   });
 }
-
