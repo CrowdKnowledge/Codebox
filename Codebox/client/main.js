@@ -1,9 +1,11 @@
 Session.set('details', false);
+Session.set('results', []);
+Session.set('query', "");
 
 if (Meteor.isClient) {
 
 	Template.results.allResults = function(){
-		return Snippets.find().fetch();
+		return Session.get('results');
 	}
 	
 	Template.results.title = function(){
@@ -14,11 +16,11 @@ if (Meteor.isClient) {
 		return this.author;
 	}
 	
-	
 	Template.results.cbid = function(){
 		console.log('called');
 		return this.cbid;
 	}
+	
 	
 	Template.details.isInDetail = function(){
 		if(Session.get('details') == false){
@@ -26,7 +28,15 @@ if (Meteor.isClient) {
 		} 
 		return true;
 	}
+	
+	Template.searchbar.events({
+		'keydown': function (event) {
+			Session.set('query', document.getElementById('searchbar').value);
+		}
+	});
 }
+
+
 
 focusOn = function(id){
 	Session.set('details', true);
@@ -35,10 +45,7 @@ focusOn = function(id){
 
 openContributor = function(){
 console.log('something');
-	var e = document.getElementById('inputTitle');
-	var x = e.left;
-	var y = e.top;
-	window.scrollto(x, y);
+    $("html, body").animate({scrollTop: $("#inputTitle").offset().top}, 300); 
 }
 
 insertSnippet = function(){
@@ -48,3 +55,6 @@ insertSnippet = function(){
 }
 
 
+Deps.autorun(function () {
+	console.log(Session.get('query'));
+});

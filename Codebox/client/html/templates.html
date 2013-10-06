@@ -1,47 +1,49 @@
 
 
 <template name="results">
-	<div id="results">
-		<div class="row">
-				{{#each allResults}}
-					<li class="result" onclick="focusOn({{cbid}})">
-						<p class="title">{{title}}<p>
-						<a href="http://dasmithii.info/" target='_blank' class="author">{{author}}</a>
-						<br>
-						<textarea readonly rows="7" cols="34" class="description" spellcheck="false" size="40">{{description}}</textarea>
-						<textarea rows="6" cols="34" class="description" spellcheck="false" size="40" value='{{code}}'/>
-					</li>
-				{{/each}}
+		<div id="results">
+			<div class="row">
+					{{#each allResults}}
+						<li class="result" onclick="focusOn({{cbid}})">
+							<p class="title">{{title}}<p>
+							<a href="http://dasmithii.info/" target='_blank' class="author">{{author}}</a>
+							<br>
+							<textarea readonly rows="7" cols="34" class="description" spellcheck="false" size="40">{{description}}</textarea>
+							<textarea rows="6" cols="34" class="description" spellcheck="false" size="40" value='{{code}}'/>
+						</li>
+					{{/each}}
+			</div>
 		</div>
-	</div>
 </template>
 
 
 <template name="details">
 	{{#if isInDetail}}
-<!-- 
-				<p> yes, it is </p>
- -->
+		<p class="plain"> there will be information here later </p>
  		<hr class="spacer">
  	{{/if}}
 </template>
 
 <template name="footer">
 	<div id="footer">
-		<span class="foottext">github.com/dasmithii/Codebox -</span> <span class="foottext">@dasmithii -</span> <span class="foottext">@HackMIT</span>
+		<a href='http://twitter.com/dasmithii' target='_blank' class="foottext">@dasmithii -</a> <a href='http://twitter.com/hackmit' target='_blank' class="foottext">@HackMIT</a>
 	</div>
 </template>
 
 
 <template name="codeinput">
 	<div id="codeInput">
-		<input id="inputTitle" class="inputElement" spellcheck="false" type="text" size="40" placeholder="short title here" />
+		<input id="inputTitle" class="inputElement" spellcheck="false" type="text" size="40" placeholder="a short title here..." />
 		<button id=submitButton class="inputElement" value="submit" onclick='insertSnippet()'>Submit</button>
 		<div id="bottomInput">
-			<textarea rows="4" cols="50" id="inputDescription" class="inputElement" spellcheck="false" type="textarea" size="40" placeholder="short description here" />
-			<textarea rows="4" cols="50" id="inputCode" class="inputElement" spellcheck="false" type="textarea" size="40" placeholder="code here" />
+			<textarea rows="4" cols="50" id="inputDescription" class="inputElement" spellcheck="false" type="textarea" size="40" placeholder="a less short description here..." />
+			<textarea rows="4" cols="50" id="inputCode" class="inputElement" spellcheck="false" type="textarea" size="40" placeholder="beautifully written code here..." />
 		</div>
 	</div>
 </template>
 
-		
+<template name="searchbar">
+	<div id="search">
+		  <input id="searchbar" spellcheck="false" type="text" size="40" placeholder="Whadayah need?" />
+	</div>
+</template>

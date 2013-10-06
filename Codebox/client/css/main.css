@@ -7,14 +7,12 @@
 }
 
 .plain{
-	font-family: 'Roboto Slab', serif;
 }
 
 #title{
 	color: #5070BA;
 	font-size: 120px;
 	margin-top: -12px;
-	font-family: 'Roboto Slab', serif;
 }
 
 #subtitle{
@@ -22,7 +20,6 @@
 	opacity: 100;
 	font-size: 20px;
 	margin-top: -.3cm;
-	font-family: 'Roboto Slab', serif;
 }
 
 #searchbar{
@@ -136,8 +133,8 @@
 
 .foottext{
 	color: white;
-	font-family: 'Roboto Slab', serif;
 	font-size: 25px;
+	text-decoration: none;
 	margin-top: 9px;
 }
 

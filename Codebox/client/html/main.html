@@ -10,11 +10,8 @@
 		<div id="header">
 			<h href="http://codebox.cc" id="title">Codebox</h>
 			<p id="subtitle">the search engine for code snippets<p>
-			<div id="search">
-				  <input id="searchbar" spellcheck="false" type="text" size="40" placeholder="Whadayah need?" />
-			</div>
+			{{> searchbar}}
 		</div>
-		
 		{{> results}}
 		<hr class="spacer">
 		{{> details}}
