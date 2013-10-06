@@ -16,7 +16,6 @@ if (Meteor.isServer) {
 					if(parts.indexOf(keys[k]) != -1){
 						if(dbparts.indexOf(keys[k]) != -1){
 							scr += 5;
-							console.log('+ FIVE');
 						}
 					}
 				}
@@ -25,7 +24,6 @@ if (Meteor.isServer) {
 					for(var m = 0; m < dbparts.length; m++){
 						if(levenshteinDistance(parts[k], dbparts[m]) <= 1  &&  nots.indexOf(parts[k]) == -1){
 							scr += 2;
-							console.log('+ TWO');
 						}
 					}
 				}
