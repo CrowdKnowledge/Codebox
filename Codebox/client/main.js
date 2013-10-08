@@ -4,7 +4,9 @@ Session.set('query', "");
 
 
 if (Meteor.isClient) {
-
+  getGists = function getGists(user, callback) {
+    Meteor.call('getGists', user, callback);
+  }
 	Template.results.allResults = function(){
 		return Session.get('results');
 	}

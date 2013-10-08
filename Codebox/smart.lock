@@ -4,7 +4,7 @@
     "basePackages": {
       "github": {},
       "require": {},
-      "sentiment": {}
+      "npm": {}
     },
     "packages": {
       "github": {
@@ -17,10 +17,10 @@
         "tag": "v0.1.0",
         "commit": "b9c5a87e9f92019cca882234086b7d32719f67e2"
       },
-      "sentiment": {
-        "git": "https://github.com/andreioprisan/meteor-sentiment.git",
-        "tag": "v0.2.1",
-        "commit": "a1901bd59d3a048f6df2e6484c08e46b506b5447"
+      "npm": {
+        "git": "https://github.com/arunoda/meteor-npm.git",
+        "tag": "v0.2.2",
+        "commit": "ad83acff83385d5ea05997c8bbc2d7493ba4c04e"
       }
     }
   }

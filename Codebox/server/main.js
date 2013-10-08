@@ -1,6 +1,9 @@
 keys = ['java', 'c', 'c++', 'javascript', 'python', 'clojure', 'scala', 'erlang', 'method', 'class', 'function', 'struct', 'def', 'void', 'double', 'float', 'number', 'var', 'int', 'integer'];
 nots = ['of', 'the', 'is', 'are', 'to', 'too'];
 
+
+
+
 if (Meteor.isServer) {
 	Meteor.methods({
 		analyze: function (query) {
@@ -15,11 +18,10 @@ if (Meteor.isServer) {
 				for(var k = 0; k < keys.length; k++){
 					if(parts.indexOf(keys[k]) != -1){
 						if(dbparts.indexOf(keys[k]) != -1){
-							scr += 5;
+							scr += 7;
 						}
 					}
 				}
-				
 				for(var k = 0; k < parts.length; k++){
 					for(var m = 0; m < dbparts.length; m++){
 						if(levenshteinDistance(parts[k], dbparts[m]) <= 1  &&  nots.indexOf(parts[k]) == -1){
@@ -27,7 +29,6 @@ if (Meteor.isServer) {
 						}
 					}
 				}
-				
 				rs.push({
 					id: db[i].cbid,
 					score: scr
@@ -41,8 +42,19 @@ if (Meteor.isServer) {
 			return a;
 		},
 		
-		getalc: function(){
-			return ALC();
+		'getGists': function getGists(user) {
+		  var GithubApi = Meteor.require('github');
+		  var github = new GithubApi({
+			  version: "3.0.0"
+		  });
+	
+		  var gists = Meteor.sync(function(done) {
+			github.gists.getFromUser({user: user}, function(err, data) {
+			  done(null, data);
+			});
+		  });
+	
+		  return gists.result;
 		}
 	});
 }
