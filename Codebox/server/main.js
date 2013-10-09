@@ -1,10 +1,105 @@
+request = Meteor.require('request');
+	var GithubApi = Meteor.require('github');
+	var github = new GithubApi({
+	  version: "3.0.0"
+	});
+
+
+
+
+Scraper = function(){
+	this.storage = [];
+}
+
+Scraper.prototype.scrape =  function(url){
+	var t = this;
+	request.get(url, function (error, response, body) {
+		t.storage.push(body);
+		console.log(body);
+	});
+}
+	
+Scraper.prototype.getStorage = function(){
+	console.log('got');
+	return this.storage;
+}
+
+Snippet = function(title, description, code, language){
+	this.title = title;
+	this.description = description;
+	if(typeof(language) != 'undefined'){
+		this.description = language + ' ' + description;
+	}
+	this.code = code;
+}
+
+Gister = function(user){
+
+  var gists = Meteor.sync(function(done) {
+	github.gists.getFromUser({user: user}, function(err, data) {
+	  done(null, data);
+	});
+  });
+  
+  gists = gists.result;
+  
+  var snips = [];
+  console.log('Gists: ' + gists.length);
+  for(var i = 0; i < gists.length; i++){
+  	var s = new Scraper();
+  	var js = [];
+  	for(var j in gists[i].files){
+  		js.push(j);
+  	}
+
+	Meteor.sync(function(done){
+		s.scrape(gists[i].files[js[0]].raw_url);
+		done(null, {});
+	});
+
+
+  	var t = gists[i].id;
+  	var d = gists[i].description;
+  	var c = s.getStorage();
+  	console.log('over');
+
+  	c = c.join('\n');
+
+  	snips.push(new Snippet(t, d, c));
+  }
+  
+  this.getSnips = function(){
+  	return snips;
+  }
+}
+
+
+
+
+
+
+
+
+
 keys = ['java', 'c', 'c++', 'javascript', 'python', 'clojure', 'scala', 'erlang', 'method', 'class', 'function', 'struct', 'def', 'void', 'double', 'float', 'number', 'var', 'int', 'integer'];
 nots = ['of', 'the', 'is', 'are', 'to', 'too'];
 
 
 
-
 if (Meteor.isServer) {
+	
+	LAST = 0;
+	i = 0;
+	scrape = function(url){
+		request.get(url, function (error, response, body) {
+			out = body;
+			console.log(out);
+			i++;
+			LAST = out;
+		});
+	}
+
+	
 	Meteor.methods({
 		analyze: function (query) {
 			var parts = query.split(' ');
@@ -43,18 +138,26 @@ if (Meteor.isServer) {
 		},
 		
 		'getGists': function getGists(user) {
-		  var GithubApi = Meteor.require('github');
-		  var github = new GithubApi({
-			  version: "3.0.0"
-		  });
-	
-		  var gists = Meteor.sync(function(done) {
-			github.gists.getFromUser({user: user}, function(err, data) {
-			  done(null, data);
-			});
-		  });
-	
-		  return gists.result;
+// 		  var GithubApi = Meteor.require('github');
+// 		  var github = new GithubApi({
+// 			  version: "3.0.0"
+// 		  });
+// 	
+// 		  var gists = Meteor.sync(function(done) {
+// 			github.gists.getFromUser({user: user}, function(err, data) {
+// 			  done(null, data);
+// 			});
+// 		  });
+// 	
+//		  return gists.result;
+			console.log('User: ' + user);
+ 			var test = new Gister(user); 			
+ 			return test.getSnips();
+		},
+		
+		getLast: function(url){
+			scrape(url);
+			return LAST;
 		}
 	});
 }
