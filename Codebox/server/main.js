@@ -13,9 +13,12 @@ Scraper = function(){
 
 Scraper.prototype.scrape =  function(url){
 	var t = this;
-	request.get(url, function (error, response, body) {
-		t.storage.push(body);
-		console.log(body);
+	Meteor.sync(function(done){
+		request.get(url, function (error, response, body) {
+			t.storage.push(body);
+			console.log(body);
+					done(null, {});
+		})
 	});
 }
 	
@@ -52,10 +55,7 @@ Gister = function(user){
   		js.push(j);
   	}
 
-	Meteor.sync(function(done){
 		s.scrape(gists[i].files[js[0]].raw_url);
-		done(null, {});
-	});
 
 
   	var t = gists[i].id;
