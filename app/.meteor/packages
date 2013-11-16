@@ -8,3 +8,7 @@ preserve-inputs
 accounts-github
 accounts-ui
 check
+appcache
+spiderable
+madewith
+code-prettify

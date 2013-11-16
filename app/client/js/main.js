@@ -28,8 +28,6 @@ if (Meteor.isClient) {
 		sortedRes = res.sort(function(a,b){
 			return b.score - a.score;
 		});
-		console.log('sorted:');
-		console.log(sortedRes);
 		return sortedRes;
 	}
 	
