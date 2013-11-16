@@ -4,17 +4,6 @@ Session.set('query', "");
 
 
 if (Meteor.isClient) {
-	  getGists = function getGists(user, callback) {
-		Meteor.call('getGists', user, callback);
-	  }
-	  
-	  getDescription = function(gist){
-		return gist.description;
-	  }
-	  
-	  getCode = function(gist){
-	  
-	  }
   
 	Template.results.allResults = function(){
 		return Session.get('results');
@@ -25,11 +14,19 @@ if (Meteor.isClient) {
 	}
 	
 	Template.results.author = function(){
-		return this.author;
+		var user = Meteor.users.findOne(this.owner);
+		if(user){
+			return user.profile.name;
+		}
+		return "unknown author";
 	}
-	
-	Template.results.cbid = function(){
-		return this.cbid;
+
+	Template.results.ref = function(){
+		var user = Meteor.users.findOne(this.owner);
+		if(user){
+			return 'http://github.com/' + user.services.github.username;
+		}
+		return "";
 	}
 	
 	Template.details.isInDetail = function(){
@@ -48,28 +45,24 @@ if (Meteor.isClient) {
 
 
 
-	focusOn = function(id){
-		Session.set('details', true);
-		console.log('focussing on ' + id);
-	}
-	
-	openContributor = function(){
-		$("html, body").animate({scrollTop: $("#inputTitle").offset().top}, 300); 
-	}
-	
-	insertSnippet = function(){
-		if(document.getElementById('inputTitle').value != "")
-			if(document.getElementById('inputDescription').value != "")
-				if(document.getElementById('inputCode').value != ""){
-					Snippets.insert(new Snippet(document.getElementById('inputTitle').value
-											   ,document.getElementById('inputDescription').value
-											   ,document.getElementById('inputCode').value));
-				}
-		document.getElementById('inputTitle').value = "";
-		document.getElementById('inputDescription').value = "";
-		document.getElementById('inputCode').value = "";
-		Session.set('query', document.getElementById('searchbar').value);
-	}
+openContributor = function(){
+	$("html, body").animate({scrollTop: $("#inputTitle").offset().top}, 300); 
+}
+
+insertSnippet = function(){
+	if(document.getElementById('inputTitle').value != "")
+		if(document.getElementById('inputDescription').value != "")
+			if(document.getElementById('inputCode').value != ""){
+				Snippets.insert(new Snippet(document.getElementById('inputTitle').value
+										   ,document.getElementById('inputDescription').value
+										   ,document.getElementById('inputCode').value,
+										   ['snippet']));
+			}
+	document.getElementById('inputTitle').value = "";
+	document.getElementById('inputDescription').value = "";
+	document.getElementById('inputCode').value = "";
+	Session.set('query', document.getElementById('searchbar').value);
+}
 
 
 Deps.autorun(function () {

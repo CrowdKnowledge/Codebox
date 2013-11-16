@@ -2,13 +2,15 @@ Snippets = new Meteor.Collection('Snippets');
 
 
 
-Snippet = function(title, description, code){
+Snippet = function(title, description, code, collections){
 	this.title = title;
 	this.owner = Meteor.userId();
 	this.code = code;
 	this.description = description;
-	this.score = 0;
+	this.collections = collections;
 	this.comments = []
+	this.score = 0;
+	this.codebox = 'main'
 	this.visable = true;
 }
 
@@ -18,8 +20,10 @@ isValidSnippet = function(doc){
 		check(doc.owner, String);
 		check(doc.code, String);
 		check(doc.description, String);
-		check(doc.score, Number);
+		check(doc.collections, Array);
 		check(doc.comments, Array);
+		check(doc.score, Number);
+		check(doc.codebox, String);		
 		check(doc.visable, Boolean);
 	} catch(e){
 		return falses;
