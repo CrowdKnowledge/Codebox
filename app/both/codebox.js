@@ -2,13 +2,29 @@ Snippets = new Meteor.Collection('Snippets');
 
 
 
-Snippet = function(title, description, code, author){
+Snippet = function(title, description, code){
 	this.title = title;
-	this.author = author  ||  'Public';
+	this.owner = Meteor.userId();
 	this.code = code;
 	this.description = description;
 	this.score = 0;
-	this.cbid = randKey(15);
+	this.comments = []
+	this.visable = true;
+}
+
+isValidSnippet = function(doc){
+	try{
+		check(doc.title, String);
+		check(doc.owner, String);
+		check(doc.code, String);
+		check(doc.description, String);
+		check(doc.score, Number);
+		check(doc.comments, Array);
+		check(doc.visable, Boolean);
+	} catch(e){
+		return falses;
+	}
+	return true;
 }
 
 
@@ -20,66 +36,42 @@ if(Meteor.isClient){
 
 
 if (Meteor.isServer) {
-  Meteor.startup(function () {
-	var tmp = Snippets.find().fetch();
-	Snippets.remove({});
-  });
 
-  	Meteor.publish("Data", function () {
-		// return all datasets for user that are still in use
-		return Data.find({owner: this.userId, active: true});
-		//return Data.find({owner: this.userId}, {fields: {}});
+	Meteor.startup(function () {
+		//Snippets.remove({});
+	});
+
+  	Meteor.publish("Snippets", function () {
+		return Snippets.find({visable: true});
 	});
 
 
-	isValidDataset = function(set){
-		try{
-			check(set.name, String);
-			check(set.data, Array);
-			for(i in set.data){
-				check(set.data[i], Object);
-			}
-			check(set.owner, String);
-			check(set.active, Boolean);
-			check(set.credit, Number);
-			check(set.stage, Number);
-			check(set.progress, Number);
-		} catch(e){
-			return false;
-		}
-		// progress is [0, 100]
-		if(set.progress < 0)   return false;
-		if(set.progress > 100) return false;
-		return true;
-	}
 	
-	Data.allow({
+	Snippets.allow({
   		insert: function (userId, doc) {
   			// deny if user not logged in or user isn't owner
   			if(!(userId && doc.owner === userId)){
-
+  				return false;
   			}
+
+  			if(isValidSnippet(doc)){
+  				return true;
+			}
+			return false;
  		},
 
  		remove: function(userId, doc){
- 			// can only remove own data
+ 			// can only remove own Snippets
 			return doc.owner === userId;
  		}, 
 
  		update: function(userId, doc, fieldNames, modifier){
- 			// users can only modify these fields manually
- 			var mods = ['name', 'stage'];
- 			for(i in fieldNames){
- 				if(mods.indexOf(fieldNames[i]) == -1){
- 					return false;
- 				}
- 			}
-  			return true;
+ 			return false;
  		}
 	});
 
 
-	Data.deny({
+	Snippets.deny({
 	  update: function (userId, docs, fields, modifier) {
 	    // can't change owners
 	    return _.contains(fields, 'owner');
