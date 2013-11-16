@@ -5,9 +5,8 @@
 			<div class="row">
 					{{#each allResults}}
 						<li class="result" onclick="focusOn({{cbid}})">
-							<span class="redSquare"></span>
 							<p class="title">{{title}}<p>
-							<a href="http://dasmithii.info/" target='_blank' class="author">{{author}}</a>
+							<a href="http://github.com/{{author}}" target='_blank' class="author">{{author}}</a>
 							<br>
 							<textarea readonly rows="6" cols="31" class="description" spellcheck="false" size="40">{{description}}</textarea>
 							<textarea rows="7" cols="31" class="code" spellcheck="false" size="40">{{code}}</textarea>

@@ -76,11 +76,7 @@ Deps.autorun(function () {
 	// should add a cancel call here
 	if(Session.get('query') != ''  && typeof(Session.get('query')) != 'undefined'){
 		Meteor.call('analyze', Session.get('query'), function(e, r){
-			var rs = [];
-			for(var i = 0; i < r.length; i++){
-				rs.push(Snippets.findOne({cbid: r[i]}));
-			}
-			Session.set('results', rs);
+			Session.set('results', r);
 		});
 	}
 });
