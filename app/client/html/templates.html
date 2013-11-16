@@ -4,13 +4,16 @@
 		<div id="results">
 			<div class="row">
 					{{#each allResults}}
+						{{#isolate}}
 						<li class="result">
 							<p class="title">{{title}}<p>
 							<a href="{{ref}}" target='_blank' class="author">{{author}}</a>
 							<br>
 							<textarea readonly rows="6" cols="31" class="description" spellcheck="false" size="40">{{description}}</textarea>
 							<textarea rows="7" cols="31" class="code" spellcheck="false" size="40">{{code}}</textarea>
+							<span><button class='{{isYes}}' onclick="makeYes('{{_id}}')">YES</button> like it? <button class='{{isNo}}' onclick="makeNo('{{_id}}')">NO</button></span>
 						</li>
+						{{/isolate}}
 					{{/each}}
 			</div>
 		</div>

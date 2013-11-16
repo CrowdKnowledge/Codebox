@@ -10,15 +10,11 @@ nots = ['of', 'the', 'is', 'are', 'to', 'too'];
 
 
 if (Meteor.isServer) {
+
 	
 	Meteor.methods({
 		analyze: function (query) {
 			return Snippets.find().fetch();
-		},
-		
-		'getGists': function getGists(user) {
- 			var test = new Gister(user); 			
- 			return test.getSnips();
 		}
 	});
 }

@@ -4,9 +4,33 @@ Session.set('query', "");
 
 
 if (Meteor.isClient) {
+
+	Template.results.score = function(){
+		return this.score;
+	}
+
+	Template.results.isNo = function(){
+		if (Meteor.userId()) {
+			return Meteor.users.findOne(Meteor.userId()).votes[this._id] == -1;
+		};
+		return false;
+	}
+
+	Template.results.isYes = function(){
+		if (Meteor.userId()) {
+			return Meteor.users.findOne(Meteor.userId()).votes[this._id] == 1;
+		};
+		return false;
+	}
   
 	Template.results.allResults = function(){
-		return Session.get('results');
+		var res = Session.get('results');
+		sortedRes = res.sort(function(a,b){
+			return b.score - a.score;
+		});
+		console.log('sorted:');
+		console.log(sortedRes);
+		return sortedRes;
 	}
 	
 	Template.results.title = function(){
@@ -73,4 +97,45 @@ Deps.autorun(function () {
 		});
 	}
 });
+
+
+makeNo = function(id){
+	if(Meteor.userId()){
+		var usr = Meteor.users.findOne(Meteor.userId());
+		if(usr){
+			if(usr.votes[id] != -1){
+				var newVotes = usr.votes;
+				newVotes[id] = -1;
+				Meteor.users.update(Meteor.userId(), {$set: {votes: newVotes}});
+				// if prev liked, dislike
+				if(usr.votes[id] == 1){
+					Snippets.update(id, {$inc: {score: -2}})
+				// if prev nothing, dislike
+				} else{
+					Snippets.update(id, {$inc: {score: -1}})
+				}
+			}
+		}
+	}
+}
+
+makeYes = function(id){
+	if(Meteor.userId()){
+		var usr = Meteor.users.findOne(Meteor.userId());
+		if(usr){
+			if(usr.votes[id] != 1){
+				var newVotes = usr.votes;
+				newVotes[id] = 1;
+				Meteor.users.update(Meteor.userId(), {$set: {votes: newVotes}});
+				// if prev disliked, like
+				if(usr.votes[id] == -1){
+					Snippets.update(id, {$inc: {score: +2}})
+				// if prev nothing, dislike
+				} else{
+					Snippets.update(id, {$inc: {score: +1}})
+				}
+			}
+		}
+	}
+}
 

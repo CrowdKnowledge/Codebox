@@ -26,7 +26,7 @@ isValidSnippet = function(doc){
 		check(doc.codebox, String);		
 		check(doc.visable, Boolean);
 	} catch(e){
-		return falses;
+		return false;
 	}
 	return true;
 }
@@ -70,7 +70,7 @@ if (Meteor.isServer) {
  		}, 
 
  		update: function(userId, doc, fieldNames, modifier){
- 			return false;
+ 			return true;
  		}
 	});
 
