@@ -36,11 +36,11 @@
 
 <template name="codeinput">
 	<div id="codeInput">
-		<input id="inputTitle" class="inputElement" spellcheck="false" type="text" size="40" placeholder="a short title here..." />
+		<input id="inputTitle" class="inputElement" spellcheck="false" type="text" size="40" placeholder="a short title here..." maxlength="20"/>
 		<button id=submitButton class="inputElement" value="submit" onclick='insertSnippet()'>Submit</button>
 		<div id="bottomInput">
-			<textarea rows="4" cols="50" id="inputDescription" class="inputElement" spellcheck="false" type="textarea" size="40" placeholder="a less short description here..." />
-			<textarea rows="4" cols="50" id="inputCode" class="inputElement" spellcheck="false" type="textarea" size="40" placeholder="beautifully written code here..." />
+			<textarea rows="4" cols="50" id="inputDescription" class="inputElement" spellcheck="false" type="textarea" size="40" placeholder="a less short description here..." maxlength="200"/>
+			<textarea rows="4" cols="50" id="inputCode" class="inputElement" spellcheck="false" type="textarea" size="40" placeholder="beautifully written code here..." maxlength="700"/>
 		</div>
 	</div>
 </template>
